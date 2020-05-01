@@ -1,7 +1,9 @@
 (ns sudokusolver.app
-  (:require [reagent.core :as r]
-            [reagent.dom :as rdom]))
+  (:require [reagent.dom :as rdom]
+            [sudokusolver.components.app :refer [app]]))
 
+(defn render []
+  (rdom/render app (.getElementById js/document "root")))
 
 (defn ^:dev/after-load main []
-  (println "Hello World!"))
+  (render))
