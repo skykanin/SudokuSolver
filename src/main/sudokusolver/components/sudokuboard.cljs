@@ -4,7 +4,7 @@
             [reagent.core :as r]))
 
 (def board-state
-  (r/atom (vec (repeat 9 (vec (repeat 9 nil))))))
+  (r/atom (vec (repeat 9 (vec (repeat 9 0))))))
 
 (add-watch board-state :watcher
   (fn [key atom old-state new-state]
@@ -18,7 +18,7 @@
         value (.. evt -target -value)
         [group cell] (mapv int (split name #" "))]
     (swap! board-state assoc-in [group cell]
-           (when-not (empty? value) (int value)))))
+           (if-not (empty? value) (int value) 0))))
     
 (defn build-attr
   "Build attribute map for input tags"
